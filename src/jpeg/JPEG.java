@@ -53,38 +53,9 @@ public class JPEG
 		return;
 	}
 	
-	public static void main(String args[])
+	public static void DCTandSCH(int[][] n)
 	{
-		int[][] n = new int[8][8];
-		
-		System.out.println("before :");
-		for (int i = 0 ;i<8;i++){
-			for (int j = 0; j<8; j++){
-				n[i][j] = j*2+i*10;
-				System.out.print(n[i][j]);
-			}
-			System.out.println();
-		}
-		
-		System.out.println("after dct:");
 		DCT(n);
-		for(int i = 0 ; i< 8 ;i++){
-			for(int j = 0; j<8 ; j++){
-				System.out.print(n[i][j]);
-			}
-			System.out.println();
-		}
-
-		System.out.println("after sch:");
 		SCH(n);
-		for (int i = 0 ;i<8;i++){
-			for (int j = 0; j<8; j++){
-				System.out.print(n[i][j]);
-			}
-			System.out.println();
-		}
-		
-
 	}
-
 }
