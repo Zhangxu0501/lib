@@ -1,4 +1,7 @@
 package jpeg;
+
+import java.util.Random; 
+
 public class JPEG 
 {	
 	public static short Round(double x)
@@ -57,5 +60,41 @@ public class JPEG
 	{
 		DCT(n);
 		SCH(n);
+	}
+	/*
+	 * 故障代码测试
+	 */
+	public static void main(String[] args){
+		int a[][] = new int[8][8];
+		for (int i = 0 ; i<8 ; i++){
+			for (int j = 0; j<8; j++)
+			{
+				Random rand = new Random();
+				a[i][j]= rand.nextInt(255);//0-255的随机数组
+				System.out.print(a[i][j]+" ");
+			}
+			System.out.println();
+		}
+		//DCT
+		System.out.println("after DCT");
+		DCT(a);
+		for (int i = 0 ; i<8 ; i++){
+			for (int j = 0; j<8; j++)
+			{
+				System.out.print(a[i][j]);
+			}
+			System.out.println();
+		}
+		//SCH
+		System.out.println("after SCH");
+		SCH(a);
+		for (int i = 0 ; i<8 ; i++){
+			for (int j = 0; j<8; j++)
+			{
+				System.out.print(a[i][j]);
+			}
+			System.out.println();
+		}
+		
 	}
 }
