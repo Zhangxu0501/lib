@@ -4,6 +4,10 @@ import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 public class Main {
+	public static void sop(Object o)
+	{
+		System.out.println(o);
+	}
 	public static void main(String[] args)throws Exception{
 		
 		int countrm=0;
@@ -23,10 +27,9 @@ public class Main {
 		int[][] temp = new int[8][8];
 		int [][] temp1=null;
 		int [][]temp2=null;
-			for (int i = 0 ; i<TheImg.height/8+1; i++){
-				for (int j = 0; j<TheImg.width/8+1; j++){
+			for (int i = 0 ; i<TheImg.height; i++){
+				for (int j = 0; j<TheImg.width; j++){
 					   		temp[i%8][j%8]=TheImg.data[i*TheImg.height+j];
-				}
 				if(i%8==0)
 				{
 					temp1=f1(temp.clone());
@@ -46,7 +49,11 @@ public class Main {
 			   			count_sm+=1;
 				}
 			}
-					
+			}
+			sop("countrm="+countrm);
+			sop("count_rm="+count_rm);
+			sop("countsm="+countsm);
+			sop("count_sm="+count_sm);
 			}
 	
 	public static int [] [] f1(int [] [] temp)
@@ -71,7 +78,30 @@ public class Main {
 	}
 	public static double compute(int [][] temp)
 	{
-		return 0.0;
+		int curi=1,curj=0,lasti=0,lastj=0;
+		int ilen=temp.length,jlen=temp[0].length;
+//		System.out.printf("ilen=%d,jlen=%d\n",ilen,jlen);
+		int direction=1;//-1 down  1 up 0 end
+		double res=0.0;
+		
+		while(true)
+		{
+			res += Math.abs(temp[curi][curj]-temp[lasti][lastj]);
+//			System.out.printf("(%d,%d),dir=%d\n",curi,curj,direction);
+			if(curi==ilen-1 && curj==jlen-1)break;
+			lasti = curi;lastj=curj;
+			curi += -direction;
+			curj += direction;
+			if(curi >=0 && curi<ilen && curj>=0 && curj<jlen)continue;
+		
+			direction=-direction;
+			if(curi==-1){if(curj==jlen){curi+=2;curj-=1;}else{curi+=1;}}
+			else if(curi==ilen){curi-=1;if(curj<jlen-2)curj+=2;}
+			else if(curj==-1){curj+=1;}
+			else if(curj==jlen){if(curi<ilen-2)curi+=2;curj-=1;}
+			
+		}
+		return res;
 	}
 		
 	}
