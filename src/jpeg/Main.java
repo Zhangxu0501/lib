@@ -27,8 +27,8 @@ public class Main {
 		int[][] temp = new int[8][8];
 		int [][] temp1=null;
 		int [][]temp2=null;
-			for (int i = 0 ; i<TheImg.height; i++){
-				for (int j = 0; j<TheImg.width; j++){
+			for (int i = 0 ; i<TheImg.data.length; i++){
+				
 					   		temp[i%8][j%8]=TheImg.data[i*TheImg.height+j];
 				if(i%8==0)
 				{
@@ -47,7 +47,7 @@ public class Main {
 			   			count_rm+=1;
 			   		else
 			   			count_sm+=1;
-				}
+				
 			}
 			}
 			sop("countrm="+countrm);
