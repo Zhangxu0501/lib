@@ -1,8 +1,7 @@
 package jpeg;
 
-import java.io.DataOutputStream;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+import java.util.Arrays;
+
 public class Main {
 	public static void sop(Object o)
 	{
@@ -27,28 +26,39 @@ public class Main {
 		int[][] temp = new int[8][8];
 		int [][] temp1=null;
 		int [][]temp2=null;
-			for (int i = 0 ; i<TheImg.data.length; i++){
-				
+			for (int i = 0 ; i<TheImg.width; i++){
+				for (int j= 0 ; j<TheImg.height; j++){
+					if(i%8==0&&j%8==0)
+					{
+						temp1=f1(temp.clone());
+				   		temp2=f_1(temp.clone());
+				   		double value=compute(temp);
+				   		double value1=compute(temp1);
+				   		double value2=compute(temp2);
+				   		
+				   		if(value<value1)
+				   			countrm+=1;
+				   		else
+				   			countsm+=1;
+				   		
+				   		if(value<value2)
+				   			count_rm+=1;
+				   		else
+				   			count_sm+=1;
+				   		sop(value);
+				   		sop(value1);
+				   		sop(value2);
+				   		print(temp);
+				   		sop("----------------------");
+				   		print(temp1);
+				   		sop("----------------------");
+				   		print(temp2);
+				   		System.in.read();
+				}
 					   		temp[i%8][j%8]=TheImg.data[i*TheImg.height+j];
-				if(i%8==0)
-				{
-					temp1=f1(temp.clone());
-			   		temp2=f_1(temp.clone());
-			   		double value=compute(temp);
-			   		double value1=compute(temp1);
-			   		double value2=compute(temp2);
-			   		
-			   		if(value<value1)
-			   			countrm+=1;
-			   		else
-			   			countsm+=1;
-			   		
-			   		if(value<value2)
-			   			count_rm+=1;
-			   		else
-			   			count_sm+=1;
-				
+					   		
 			}
+				
 			}
 			sop("countrm="+countrm);
 			sop("count_rm="+count_rm);
@@ -62,7 +72,12 @@ public class Main {
 			for(int j=0;j<8;j++)
 			{
 				if(Integer.lowestOneBit(temp[i][j])==1)
-					temp[i][j]-=1;
+				{
+					sop("-1-1");
+					temp[i][j]=temp[i][j]-1;
+				}
+				temp[i][j]=0;
+					
 			}
 		return temp;
 	}
@@ -74,6 +89,7 @@ public class Main {
 				if(Integer.lowestOneBit(temp[i][j])!=1)
 					temp[i][j]-=1;
 			}
+		
 		return temp;
 	}
 	public static double compute(int [][] temp)
@@ -102,6 +118,11 @@ public class Main {
 			
 		}
 		return res;
+	}
+	public static void  print(int [] [] temp)
+	{
+		for(int i=0;i<temp.length;i++)
+		System.out.println(Arrays.toString(temp[i]));
 	}
 		
 	}
