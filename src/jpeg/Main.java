@@ -30,8 +30,8 @@ public class Main {
 				for (int j= 0 ; j<TheImg.height; j++){
 					if(i%8==0&&j%8==0)
 					{
-						temp1=f1(temp.clone());
-				   		temp2=f_1(temp.clone());
+						temp1=f1(clone(temp));
+				   		temp2=f_1(clone(temp));
 				   		double value=compute(temp);
 				   		double value1=compute(temp1);
 				   		double value2=compute(temp2);
@@ -45,6 +45,8 @@ public class Main {
 				   			count_rm+=1;
 				   		else
 				   			count_sm+=1;
+				   		
+				   		/*
 				   		sop(value);
 				   		sop(value1);
 				   		sop(value2);
@@ -54,6 +56,8 @@ public class Main {
 				   		sop("----------------------");
 				   		print(temp2);
 				   		System.in.read();
+				   		*/
+				   		
 				}
 					   		temp[i%8][j%8]=TheImg.data[i*TheImg.height+j];
 					   		
@@ -73,10 +77,8 @@ public class Main {
 			{
 				if(Integer.lowestOneBit(temp[i][j])==1)
 				{
-					sop("-1-1");
 					temp[i][j]=temp[i][j]-1;
 				}
-				temp[i][j]=0;
 					
 			}
 		return temp;
@@ -118,6 +120,14 @@ public class Main {
 			
 		}
 		return res;
+	}
+	public static int [] []  clone(int [] [] temp)
+	{
+		int [] [] temp1=new int [8] [8];
+		for(int i=0;i<8;i++)
+			for(int j=0;j<8;j++)
+				temp1[i][j]=temp[i][j];
+		return temp;
 	}
 	public static void  print(int [] [] temp)
 	{
